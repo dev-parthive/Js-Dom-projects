@@ -13,9 +13,29 @@ function Main() {
   autoBtnStop.style.display = "none";
 
   //   Event Listeners
-
+  //Change button functionaltiy
   btn.addEventListener("click", () => {
-    root.style.backgroundColor = `${GenerateRGBColor()}`;
+    const bgColor = GenerateRGBColor();
+    root.style.backgroundColor = bgColor;
+    textColor.innerText = bgColor;
+  });
+
+  //   auto color change button functionality
+  autoBtn.addEventListener("click", function () {
+    autoBtn.style.display = "none";
+    autoBtnStop.style.display = "block";
+    const intervalId = window.setInterval(() => {
+      const bgColor = GenerateRGBColor();
+      root.style.backgroundColor = bgColor;
+      textColor.innerText = bgColor;
+    }, 5000);
+
+    autoBtnStop.addEventListener("click", function () {
+      autoBtnStop.style.display = "none";
+      autoBtn.style.display = "block";
+      clearInterval(intervalId);
+      textColor.innerText = "rgb(0, 0, 0)";
+    });
   });
 
   // Change the background color by RGB
